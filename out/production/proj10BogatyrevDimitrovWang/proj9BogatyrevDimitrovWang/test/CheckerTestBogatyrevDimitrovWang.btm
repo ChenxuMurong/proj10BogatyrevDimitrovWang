@@ -1,0 +1,126 @@
+class CheckerTestBogatyrevDimitrovWang extends Maine{
+    int i = 0;
+    TextIO io_field = new TextIO();
+    boolean chart_field = false;
+    boolean boolean1_field = true;
+    var boolean_field = true; // undefined declaration type
+    boolean nameConflict_field = 1; // illegal declaration: wrong (primitive) type
+    Maine me = new Maine();
+    boolean bu = this.me; // illegal declaration: wrong (class) type
+
+
+    void demo(String str, int aaa) {
+        for(super.hey = str; cast(int,i < 5) ;i = i + 1){ // illegal cast + non-boolean predicate
+            var bbbb = 0;
+        }
+
+        var negative = boolean_field; // non-existent type "var" (declared as field)
+
+        var me = new Maine(); // creates a local variable but NOT A FIELD, so it is not a duplicate
+
+        var me2 = new Maine();
+
+        me; // legal expression
+        me.maine(i,i); // legal method call
+        this.me; // legal var expr
+        super.me; // undefined field "me"
+        super.superMe; // correct way to use "super" :)
+        this.superMe; // "this" can also access inherited fields :)
+        this.me.maine(i,i); // legal dispatch call on me
+        this.me.newHampshire(i,i); // undefined method for Maine
+        super.me.maine(i,i); // "me" is undefined in super class
+
+        this.me2; // illegal varExpr: me2 isn't a class field
+        this.me2.maine(2,2); // illegal varExpr: me2 isn't a class field
+
+        bar(1); // legal function call
+        this.bar(1); // also legal function call (bar is in this class)
+        this.maine(1,1); // also legal function call (maine() is in the superclass)
+        super.bar(1); // illegal function call (bar in the superclass is a var not a method)
+        super.bar; // legal because there's an instance var called "bar" in super class
+        io_field.checker(1111); // method undefined in class "TextIO"
+        this.io_field.checker(1111); // same problem as above
+
+        // ************** ALL FOLLOWING DISPATCH CALLS ARE INVALID ****************
+        undefined_name_without_reference_obj(); // method name undefined anywhere in program
+        super.negate(true); // method name undefined in super class's scope
+        this.defined_only_in_Main(); // method name undefined in this class's scope
+        suuuu.maine(); // invalid object reference
+        super.maine(); // 0 / 2 arguments provided
+        super.maine(i,95); // right way to do it :)
+        super.maine(i, i, i); // 3 / 2 arguments provided
+        super.maine(chart_field,chart_field); // right number, but wrong type of arguments provided
+        // ********************************************************************
+
+        var nameConflict_field = 1; // here, name conflict with field isn't an issue because it's a local var
+        {
+            // name duplicate in this scope
+            var nameConflict_field = null; // null initialization + name conflict
+            var nothingherematters = maine(this.i,this.i); // void initialization
+        }
+        var k = (nameConflict_field instanceof Main); // just making a boolean for the next line
+        var inte = cast(Main, super.nameConflict_field) || k; // illegal to cast primitive type
+        var b = cast(boolean, new Main()); // illegal (incompatible) types to cast
+        var testCast = cast(illegal_type, new Main()); // illegal destination type
+
+        bbbb = 123; // undeclared variable name in assignment
+        inte = new Maine(); // incompatible type in assignment statement
+        inte = 1; // incompatible type in assignment statement
+        this.me = io_field; // incompatible type in assignment statement
+        this.me = "I LOVE THE STATE OF MAINE!\n"; // incompatible type in assignment statement
+        super.superMe = null;
+        super.superMe = new Object(); // error because object is not a subclass of Maine
+        str = new Object(); // error because object is not a subclass of String
+
+
+
+        // undefined VarExpr
+        while (bbbb){
+            if (false){
+                break;
+             }
+        }
+
+
+        break; // break statement outside of a loop
+     }
+
+    void bar(int foo){
+    }
+
+    void checker(){
+    }
+}
+
+class Maine{
+
+    int bar = 1;
+    boolean nameConflict_field = true;
+    Maine superMe = new Maine();
+    int barfoo = 0;
+
+    /**
+    * this is an empty method demonstrating our
+    * implementation of the dispatch expression
+    * @param a an int
+    * @param b also an int
+    * @returns nothing
+    */
+     void maine(int a, int b) {
+
+
+     }
+
+}
+
+class Main{
+    void maim(){ // misspelled "main" so that the checker can find this bug
+
+    }
+
+    int defined_only_in_Main()
+    {
+
+        return 1;
+    }
+}

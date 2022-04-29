@@ -1,0 +1,13 @@
+class Main extends List {
+
+    int x = 1;
+
+    void main(){
+        var x = super.x.a(Sys);
+        var y = (super.yo = this.x * 5);
+        for(; ; ){
+            Sys.yes();
+        }
+
+    }
+}

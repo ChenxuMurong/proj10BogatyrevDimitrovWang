@@ -1,0 +1,48 @@
+/*
+ * File: Controller.java
+ * Names: Philipp Bogatyrev, Anton Dimitrov, Baron Wang
+ * Class: CS 361
+ * Project 6
+ * Date: March 18
+ */
+
+
+/* Set hello button color to light green */
+#helloButton {
+    -fx-background-color: LightGreen;
+}
+
+/* Set goodbye button color to light pink */
+#goodbyeButton {
+    -fx-background-color: LightPink;
+}
+
+#compileButton {
+    -fx-background-color: PALETURQUOISE;
+}
+
+#runButton {
+    -fx-background-color: PALEGREEN;
+}
+
+#stopButton {
+    -fx-background-color: PALEVIOLETRED;
+}
+
+#separator {
+    -fx-border-width: 0.4px;
+    -fx-border-color: grey;
+    -fx-background-color: grey;
+}
+
+/* Set general styling of the button class */
+.button {
+    -fx-border-color: Black;
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+}
+
+/* Make font size to 10 */
+.root {
+    -fx-font-size: 10pt;
+}

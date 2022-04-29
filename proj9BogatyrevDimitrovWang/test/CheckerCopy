@@ -1,0 +1,40 @@
+/*
+NOTE TO SELF: this is scope lvl 1
+*/
+
+/*
+ASK DALE:
+1. class name conflict bug
+2. place holder type "object"
+3. is it possible to directly access
+    superclass's stuff w/o this/super
+4. error masking when declaring using
+    undefined assignment, then cast it
+    to something else (allowed because
+    prog thinks its casting an Object??)
+*/
+
+class thiss extends Main{
+// scope lvl 2
+    int subClassField=  0;
+
+
+    void maink(String str, int aaa) {
+           super.subClassField++;
+           this.nameConflict_field=true;
+     }
+
+}
+
+class Main{
+    int bar = 1;
+    boolean nameConflict_field = true;
+
+     void main() {
+
+
+     hehehe.delete();
+
+     }
+
+}
