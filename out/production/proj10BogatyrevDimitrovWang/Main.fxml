@@ -104,8 +104,8 @@
             <items>
                 <!-- Compile Button -->
                 <Button id="checkButton" fx:id="checkButton"
-                    mnemonicParsing="false" onAction="#handleCompileButton" 
-                    prefHeight="30.0" prefWidth="60.0" text="Check">
+                    mnemonicParsing="false" onAction="#handleCheckButton"
+                    prefHeight="30.0" prefWidth="60.0" text="Check" >
                     <padding>
                         <Insets left="2.0" right="2.0" />
                     </padding>

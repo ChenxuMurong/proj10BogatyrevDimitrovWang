@@ -12,6 +12,8 @@ import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import bantam.semant.SemanticAnalyzer;
+import bantam.util.ErrorHandler;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -100,14 +102,38 @@ public class Controller {
     }
 
     /**
-     * 1. Save dialog for unsaved files
-     * 2. compiles the file currently open (unless cancelled)
+     * uses the bantam lexer, parser, and semantic analyzzer
+     * to check if the code is legal bantam java code
      *
      * @param event ActionEvent related to javafx
-    */
+     * @author Baron Wang
+     */
     @FXML
-    void handleCompileButton(ActionEvent event) {
+    void handleCheckButton(ActionEvent event) throws Exception {
         cancel_compiler = false;
+        confirmIfUnsaved(event);
+        if (cancel_compiler) return;
+
+        String filePath = this.fileController.getSavedPaths().get(getSelectedTab());
+        Thread thrd;
+        thrd = runProcess("javac bantam/semant/SemanticAnalyzer.java");
+        thrd.join();
+        try{
+            thrd = runProcess("java bantam/semant/SemanticAnalyzer "+filePath);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        thrd.join();
+
+    }
+
+    /**
+     * helper method to check if a file is saved;
+     * prompts user to take action accordingly
+     * @param event
+     */
+    void confirmIfUnsaved(ActionEvent event){
         if (!this.fileController.selectedTabIsSaved(tabPane)) {
             // prompts user to save before proceeding to compile
             Dialog dialog = DialogOptions.getUnsavedChangesDialog(
@@ -121,9 +147,22 @@ public class Controller {
             // Quit the process if user chooses CANCEL
             else if (result.get() == ButtonType.CANCEL) {
                 cancel_compiler = true;
-                return;
             }
         }
+    }
+
+    /**
+     * 1. Save dialog for unsaved files
+     * 2. compiles the file currently open (unless cancelled)
+     *
+     * @param event ActionEvent related to javafx
+    */
+    @FXML
+    void handleCompileButton(ActionEvent event) {
+        cancel_compiler = false;
+        confirmIfUnsaved(event);
+
+        if (cancel_compiler) return;
 
         if (!this.fileController.getSavedPaths().containsKey(getSelectedTab())){
             // if no file corresponding to this tab exists in savedPaths hashmap,

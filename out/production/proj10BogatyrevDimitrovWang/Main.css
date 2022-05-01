@@ -17,7 +17,7 @@
     -fx-background-color: LightPink;
 }
 
-#compileButton {
+.button {
     -fx-background-color: PALETURQUOISE;
 }
 

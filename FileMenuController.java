@@ -45,13 +45,15 @@ public class FileMenuController {
             initialDir = new File("./");
         }
         fileChooser.setInitialDirectory(initialDir);
-        List<String> extensionList = Arrays.asList(new String[]{"*.txt", "*.fxml", "*.css", "*.java", "*.py"});
+        List<String> extensionList = Arrays.asList(new String[]{"*.txt", "*.fxml",
+                "*.css", "*.java", "*.py", "*.btm"});
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Text Files", extensionList),
                 new FileChooser.ExtensionFilter("FXML Files", extensionList),
                 new FileChooser.ExtensionFilter("CSS Files", extensionList),
                 new FileChooser.ExtensionFilter("Java Files", extensionList),
-                new FileChooser.ExtensionFilter("Python Files", extensionList));
+                new FileChooser.ExtensionFilter("Python Files", extensionList),
+                new FileChooser.ExtensionFilter("Bantam Files", extensionList));
 
 
         File selectedFile = fileChooser.showOpenDialog(tabPane.getScene().getWindow());
@@ -249,13 +251,14 @@ public class FileMenuController {
     public void handleSaveAs(ActionEvent event, TabPane tabPane) {
         // create a new fileChooser
         FileChooser fileChooser = new FileChooser();
-        List<String> extensionList = Arrays.asList(new String[]{"*.txt", "*.fxml", "*.css", "*.java", "*.py"});
+        List<String> extensionList = Arrays.asList(new String[]{"*.txt", "*.fxml", "*.css", "*.java", "*.py","*.btm"});
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Text Files", extensionList),
                 new FileChooser.ExtensionFilter("FXML Files", extensionList),
                 new FileChooser.ExtensionFilter("CSS Files", extensionList),
                 new FileChooser.ExtensionFilter("Java Files", extensionList),
-                new FileChooser.ExtensionFilter("Python Files", extensionList));
+                new FileChooser.ExtensionFilter("Python Files", extensionList),
+                new FileChooser.ExtensionFilter("Bantam Files", extensionList));
 
 
 
