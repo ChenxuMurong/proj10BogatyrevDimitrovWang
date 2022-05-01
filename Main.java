@@ -54,7 +54,7 @@ public class Main extends Application {
                 }
             });
     
-            primaryStage.setTitle("Project 6");
+            primaryStage.setTitle("Project 10");
     
             // Load css file
             Scene scene = new Scene(root);

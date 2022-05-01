@@ -114,11 +114,14 @@ public class Controller {
         confirmIfUnsaved(event);
         if (cancel_compiler) return;
 
+        // get current tab's filepath
         String filePath = this.fileController.getSavedPaths().get(getSelectedTab());
         Thread thrd;
+        // compile semantic analyzer
         thrd = runProcess("javac bantam/semant/SemanticAnalyzer.java");
         thrd.join();
         try{
+            // run the semantic analyzer
             thrd = runProcess("java bantam/semant/SemanticAnalyzer "+filePath);
 
         }catch (Exception e){
