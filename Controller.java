@@ -67,8 +67,8 @@ public class Controller {
     @FXML
     private MenuItem saveMI, saveAsMI, closeMI; // menu items
 
-    @FXML
-    private ComboBox langBox;
+//    @FXML
+//    private ComboBox langBox;
 
     private FileMenuController fileController = new FileMenuController();
     // List of saved tabs and their content
@@ -189,56 +189,31 @@ public class Controller {
         if (getSelectedTab() == null) return;
 
 
-        if(! cancel_compiler){
+        if (!cancel_compiler) {
             File savedFile = new File(this.fileController.getSavedPaths().get(getSelectedTab()));
-            switch(langBox.getSelectionModel().getSelectedItem().toString()){
-                case "Java":
-                    try {
-                        handleCompileButton(event);
-                        // prepare classpath location
-                        int endOfPath =
-                                savedFile.getPath().length() - savedFile.getName().length();
+            try {
+                handleCompileButton(event);
+                // prepare classpath location
+                int endOfPath =
+                        savedFile.getPath().length() - savedFile.getName().length();
 
-                        String pathWithoutFile = savedFile.getPath().substring(0, endOfPath);
+                String pathWithoutFile = savedFile.getPath().substring(0, endOfPath);
 
-                        String fileWithoutExtension =
-                                savedFile.getName().substring(0,savedFile.getName().length()-5);
+                String fileWithoutExtension =
+                        savedFile.getName().substring(0, savedFile.getName().length() - 5);
 
-                        console.appendText(
-                                "java " + "-cp " + pathWithoutFile + " "
-                                        + fileWithoutExtension + "\n");
-                        runProcess("java " + "-cp " + pathWithoutFile + " " + fileWithoutExtension);
+                console.appendText(
+                        "java " + "-cp " + pathWithoutFile + " "
+                                + fileWithoutExtension + "\n");
+                runProcess("java " + "-cp " + pathWithoutFile + " " + fileWithoutExtension);
 
-                    } catch (Exception e) {
-                        Alert alertBox = new Alert(Alert.AlertType.ERROR);
-                        alertBox.setHeaderText("Process Interrupted");
-                        alertBox.setContentText(e.toString());
-                        alertBox.show();
-                    }
-                case "Python":
-                    try {
-                        // prepare classpath location
-                        int endOfPath =
-                                savedFile.getPath().length() - savedFile.getName().length();
-
-                        String pathWithoutFile = savedFile.getPath().substring(0, endOfPath);
-
-                        String fileWithoutExtension =
-                                savedFile.getName().substring(0,savedFile.getName().length()-3);
-
-                        console.appendText(
-                                "python3 " + pathWithoutFile +
-                                        savedFile.getName() + "\n");
-                        runProcess("python3 " + pathWithoutFile
-                                + savedFile.getName() + "\n");
-
-                    } catch (Exception e) {
-                        Alert alertBox = new Alert(Alert.AlertType.ERROR);
-                        alertBox.setHeaderText("Process Interrupted");
-                        alertBox.setContentText(e.toString());
-                        alertBox.show();
-                    }
+            } catch (Exception e) {
+                Alert alertBox = new Alert(Alert.AlertType.ERROR);
+                alertBox.setHeaderText("Process Interrupted");
+                alertBox.setContentText(e.toString());
+                alertBox.show();
             }
+
 
         }
     }
@@ -268,34 +243,6 @@ public class Controller {
             }
         });
 
-        langBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
-            @Override
-            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                if (oldValue != newValue){
-                    CodeArea oldArea;
-                    VirtualizedScrollPane vsp;
-                    switch(langBox.getSelectionModel().getSelectedItem().toString()){
-                        case "Java":
-                            compileButton.disableProperty().bind(noTabs());
-                            JavaCodeArea javaCodeArea = new JavaCodeArea();
-                            vsp = (VirtualizedScrollPane) getSelectedTab().getContent();
-                            oldArea = (CodeArea) vsp.getContent();
-                            javaCodeArea.getCodeArea().replaceText(oldArea.getText());
-                            getSelectedTab().setContent(new VirtualizedScrollPane<>(javaCodeArea.getCodeArea()));
-                            break;
-                        case "Python":
-                            compileButton.disableProperty().unbind();
-                            compileButton.setDisable(true);
-                            PythonCodeArea pythonCodeArea = new PythonCodeArea();
-                            vsp = (VirtualizedScrollPane) getSelectedTab().getContent();
-                            oldArea = (CodeArea) vsp.getContent();
-                            pythonCodeArea.getCodeArea().replaceText(oldArea.getText());
-                            getSelectedTab().setContent(new VirtualizedScrollPane<>(pythonCodeArea.getCodeArea()));
-                            break;
-                    }
-                }
-            }
-        });
 
         // set disable property when no tabs are open
         closeMI.disableProperty().bind(noTabs());
