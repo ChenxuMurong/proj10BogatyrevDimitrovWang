@@ -103,9 +103,9 @@
             AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <items>
                 <!-- Compile Button -->
-                <Button id="compileButton" fx:id="compileButton" 
+                <Button id="checkButton" fx:id="checkButton"
                     mnemonicParsing="false" onAction="#handleCompileButton" 
-                    prefHeight="30.0" prefWidth="60.0" text="Compile">
+                    prefHeight="30.0" prefWidth="60.0" text="Check">
                     <padding>
                         <Insets left="2.0" right="2.0" />
                     </padding>
@@ -134,14 +134,6 @@
                     </tabs>
                 </TabPane>
                 <Separator id="separator" />
-                <ComboBox fx:id = "langBox" value="Java">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Python"/>
-                            <String fx:value="Java"/>
-                        </FXCollections>
-                    </items>
-                </ComboBox>
 
                 <VirtualizedScrollPane fx:id="consoleScrollPane" prefHeight="120.0"
                     prefWidth="1200.0" AnchorPane.bottomAnchor="0" VBox.vgrow="ALWAYS">

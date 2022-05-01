@@ -15,8 +15,6 @@ import java.util.concurrent.Executors;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -38,7 +36,7 @@ import org.fxmisc.richtext.StyleClassedTextArea;
 public class Controller {
 
     @FXML
-    private Button compileButton; // disable when no files
+    private Button checkButton; // disable when no files
 
     @FXML
     private Button runButton; // disable when no files
@@ -87,9 +85,9 @@ public class Controller {
      * Initialize the first tab so that VirtualizedScrollPanes hold CodeArea in the tab
      */
     public void initializeFirstTab() {
-        // disable compile, run, and stop buttons
+        // disable check, run, and stop buttons
         runButton.setDisable(true);
-        compileButton.setDisable(true);
+        checkButton.setDisable(true);
         stopButton.setDisable(true);
 
         // default code area: java
@@ -97,7 +95,7 @@ public class Controller {
         CodeArea codeArea = javaCodeArea.getCodeArea();
         initialTab.setContent(new VirtualizedScrollPane<>(codeArea));
 
-        compileButton.disableProperty().bind(noTabs());
+        checkButton.disableProperty().bind(noTabs());
         runButton.disableProperty().bind(noTabs());
     }
 
