@@ -4,9 +4,12 @@ class Main extends List {
 
     void main(){
         var x = super.x.a(Sys);
+        var y = (Sys) x;
+        (1+1)*5;
         var y = (super.yo = this.x * 5);
         for(; ; ){
-            cast(String, x);
+            (String) x;
+            x = (Object) x;
             Sys.yes();
         }
 

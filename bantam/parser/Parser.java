@@ -35,6 +35,17 @@ public class Parser
     private Token currentToken; // the lookahead token
     private ErrorHandler errorHandler; // collects & organizes the error messages
 
+    // (proj 10 java-syntax) cast expression should have one of these following it once
+    // it is scanned
+    private final Set<Token.Kind> symbolsAfterCast = Set.of(
+            // literals
+            INTCONST, STRCONST, BOOLEAN, IDENTIFIER,
+            // "("
+            LPAREN,
+            // new
+            NEW
+    );
+
     // constructor
     public Parser(ErrorHandler errorHandler) {
         this.errorHandler = errorHandler;
@@ -706,7 +717,7 @@ public class Parser
 //
 //            String typeStr = parseType();
 //            if (currentToken.kind != RPAREN){
-//                return null;
+//                return null; // at this point the scanner must have messed up stuff...
 //            }
 //            currentToken = scanner.scan();
 //
@@ -831,6 +842,7 @@ public class Parser
         int position = currentToken.position;
         Expr expr;
         // case 1: ( <Expression> )
+        // proj 10 enhancement: checks for cast expr (<type>) <expr>
         // check for "("
         if (currentToken.spelling.equals("(")){
             currentToken = scanner.scan();
@@ -842,6 +854,14 @@ public class Parser
             }
 
             currentToken = scanner.scan();
+
+            // if binary symbols or semicolon follow
+            if (symbolsAfterCast.contains(currentToken.kind)){
+                Expr castExpr = parseExpression();
+                String typeStr = ((VarExpr) expr).getName();
+                return new CastExpr(position,typeStr,castExpr);
+            }
+
             return expr;
         }
         // case 2: <IntegerConst>

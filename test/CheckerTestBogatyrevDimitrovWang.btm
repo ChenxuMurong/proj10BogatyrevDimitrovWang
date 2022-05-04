@@ -59,9 +59,10 @@ class CheckerTestBogatyrevDimitrovWang extends Maine{
             var nothingherematters = maine(this.i,this.i); // void initialization
         }
         var k = (nameConflict_field instanceof Main); // just making a boolean for the next line
-        var inte = cast(Main, super.nameConflict_field) || k; // illegal to cast primitive type
-        var b = cast(boolean, new Main()); // illegal (incompatible) types to cast
-        var testCast = cast(illegal_type, new Main()); // illegal destination type
+        var inte = (Main) super.nameConflict_field || k; // illegal to cast primitive type
+        var b = (boolean) new Main(); // illegal (incompatible) types to cast
+        var testCast = (illegal_type) new Main(); // illegal destination type
+        testCast = (Main) new Main(); // correct way to parse a cast expr
 
         bbbb = 123; // undeclared variable name in assignment
         inte = new Maine(); // incompatible type in assignment statement
