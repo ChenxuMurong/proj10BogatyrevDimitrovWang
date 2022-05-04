@@ -690,14 +690,43 @@ public class Parser
 
 
     // <CastExpression> ::= CAST ( <Type> , <Expression> )
-
+    // Proj 10 enhancement: (<type>) <expr>
     private Expr parseCast() throws IOException {
         int position = currentToken.position;
 
         if (currentToken.kind != CAST){
-            // if token isn't CAST, return null
-            // other functions may return real val
+            // if token isn't CAST, check if the
+            // code is using java symtax (<type>) <expr>
+//            if(currentToken.kind != LPAREN){
+//                return null;
+//            }
+//
+//            // start parsing (<type>) <expr>
+//            currentToken = scanner.scan();
+//
+//            String typeStr = parseType();
+//            if (currentToken.kind != RPAREN){
+//                return null;
+//            }
+//            currentToken = scanner.scan();
+//
+//            // at this point, if the parser sees anything BUT an expression, it
+//            // returns null because the expression is no longer a cast, but rather
+//            // a unaryPrefix thing
+//            Expr exprStr = null;
+//            try{
+//                exprStr = parseExpression();
+//            }
+//            catch (CompilationException e){
+//                // errors out:
+//                // it decides the expr is a unaryPrefix; return null
+//                return null;
+//            }
+//
+//            // otherwise we got a cast expr
+//            return new CastExpr(position,typeStr,exprStr);
             return null;
+
         }
         currentToken = scanner.scan();
         if (currentToken.kind != LPAREN){
