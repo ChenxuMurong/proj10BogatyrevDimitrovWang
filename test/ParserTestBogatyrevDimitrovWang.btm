@@ -1,11 +1,11 @@
 class Main extends List {
 
-    int x = 1;
+    random x = 1;
 
     void main(){
         var x = super.x.a(Sys);
         var y = (Sys) x;
-        (1+1)*5;
+        cast(int,(1+1)*5);
         var y = (super.yo = this.x * 5);
         for(; ; ){
             (String) x;

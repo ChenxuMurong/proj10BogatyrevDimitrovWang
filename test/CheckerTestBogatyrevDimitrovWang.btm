@@ -63,6 +63,7 @@ class CheckerTestBogatyrevDimitrovWang extends Maine{
         var b = (boolean) new Main(); // illegal (incompatible) types to cast
         var testCast = (illegal_type) new Main(); // illegal destination type
         testCast = (Main) new Main(); // correct way to parse a cast expr
+        testCast = cast(Main,new Main()); // old "cast"
 
         bbbb = 123; // undeclared variable name in assignment
         inte = new Maine(); // incompatible type in assignment statement
