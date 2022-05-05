@@ -122,6 +122,23 @@ public class FileMenuController {
         return false;
     }
 
+    /**
+     * Helper method that checks if a tab is saved
+     *
+     * @return boolean whether the text in the tab is saved.
+     */
+    public boolean tabIsSaved(Tab tab) {
+        // if tab name has been changed and current text matches with
+        // the saved text in record
+        if (!this.savedContents.containsKey(tab) ||
+                !((CodeArea)(( (VirtualizedScrollPane) tab.getContent()).getContent()))
+                        .getText().equals(
+                        this.savedContents.get(tab))) {
+            return false;
+        }
+        return true;
+    }
+
 
     /**
      * Helper method that handles unsaved text and closes the tab. Shows a dialog

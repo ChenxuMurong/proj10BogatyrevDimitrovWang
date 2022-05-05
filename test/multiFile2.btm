@@ -4,7 +4,6 @@ class Maine{
     A b;
     void main(){
         var b = 0;
-        var b = 0;
         a++;
     }
 

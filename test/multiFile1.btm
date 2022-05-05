@@ -6,7 +6,7 @@ NOTE TO SELF: this is scope lvl 1
 ASK DALE:
 1. class name conflict bug
 2. place holder type "object"
-3. is it possible to directly access
+3. is it possibless to directly access
     superclass's stuff w/o this/super
 4. error masking when declaring using
     undefined assignment, then cast it
@@ -29,7 +29,6 @@ class A extends Main{
 class Main{
     int bar = 1;
     boolean nameConflict_field = true;
-    boolean qw = 1;
 
      void main() {
 

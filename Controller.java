@@ -114,15 +114,21 @@ public class Controller {
         confirmIfUnsaved(event);
         if (cancel_compiler) return;
 
-        // get current tab's filepath
-        String filePath = this.fileController.getSavedPaths().get(getSelectedTab());
-        Thread thrd;
+        Thread thrd = null;
         // compile semantic analyzer
         thrd = runProcess("javac bantam/semant/SemanticAnalyzer.java");
         thrd.join();
+
+        StringBuilder runCommand = new StringBuilder("java bantam/semant/SemanticAnalyzer ");
         try{
+            // iterate thru tabpane to get all files' paths
+            for (Tab tab: tabPane.getTabs()){
+                runCommand.append(this.fileController.getSavedPaths().get(tab));
+                runCommand.append(" ");
+            }
+
             // run the semantic analyzer
-            thrd = runProcess("java bantam/semant/SemanticAnalyzer "+filePath);
+            thrd = runProcess(runCommand.toString());
 
         }catch (Exception e){
             e.printStackTrace();
@@ -137,19 +143,34 @@ public class Controller {
      * @param event
      */
     void confirmIfUnsaved(ActionEvent event){
-        if (!this.fileController.selectedTabIsSaved(tabPane)) {
-            // prompts user to save before proceeding to compile
-            Dialog dialog = DialogOptions.getUnsavedChangesDialog(
-                    getSelectedTab().getText(), "compile");
+        for (Tab tab: tabPane.getTabs()) {
+            if (!this.fileController.tabIsSaved(tab)) {
+                // prompts user to save before proceeding to compile
+                Dialog dialog = DialogOptions.getUnsavedChangesDialog(
+                        tab.getText(), "compile");
 
-            Optional<ButtonType> result = dialog.showAndWait();
-            // Call handleSave() if user chooses YES
-            if (result.get() == ButtonType.YES) {
-                this.handleSave(event);
-            }
-            // Quit the process if user chooses CANCEL
-            else if (result.get() == ButtonType.CANCEL) {
-                cancel_compiler = true;
+                Optional<ButtonType> result = dialog.showAndWait();
+                // Call handleSave() if user chooses YES
+                if (result.get() == ButtonType.YES) {
+                    // TODO: ONLY SAVE SELECTED TAB
+                    this.handleSave(event);
+                }
+                // Quit the process if user chooses CANCEL
+                else if (result.get() == ButtonType.CANCEL) {
+                    cancel_compiler = true;
+                }
+                // if user chooses NO, alert
+                else {
+                    String exceptionText = "Please save all tabs before checking " +
+                            "the semantics of Bantam";
+
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Exception Alert");
+                    alert.setHeaderText("Unsaved tab for \"" + this.fileController.getSavedPaths().get(tab)+"\"");
+                    alert.setContentText(exceptionText);
+                    alert.showAndWait();
+                    cancel_compiler = true;
+                }
             }
         }
     }
