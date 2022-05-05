@@ -1,0 +1,9 @@
+class Main{
+
+    int a = 9099;
+
+    void main(){
+        a++;
+    }
+
+}

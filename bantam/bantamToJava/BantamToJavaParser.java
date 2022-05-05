@@ -138,7 +138,7 @@ public class BantamToJavaParser
                     + " at line " + position);
         }
 
-        javaFileBody += "  ";
+        javaFileBody += " ";
         javaFileBody += currentToken.getSpelling();
         currentToken = scanner.scan();
         String identifier = parseIdentifier();
@@ -194,7 +194,7 @@ public class BantamToJavaParser
             // return this method
             return new Method(position,typeName,
                     funcOrVarName,formalList, blockStmt.getStmtList());
-        }
+        } 
 
         // case 2: field
         if (currentToken.spelling.equals("=")){
@@ -1011,6 +1011,8 @@ public class BantamToJavaParser
         }
         if (currentToken.kind == VAR){
             String spel = currentToken.spelling;
+            javaFileBody += " ";
+            javaFileBody += spel;
             currentToken = scanner.scan();
             return spel;
         }
