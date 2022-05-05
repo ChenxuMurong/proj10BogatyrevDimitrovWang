@@ -37,6 +37,8 @@ import bantam.util.Error;
 import java.io.IOException;
 import java.util.*;
 
+import static bantam.lexer.Token.Kind.EOF;
+
 /**
  * The <tt>SemanticAnalyzer</tt> class performs semantic analysis.
  * In particular this class is able to perform (via the <tt>analyze()</tt>
@@ -402,26 +404,32 @@ public class SemanticAnalyzer
      * System.out.
      * @param args the pathnames of files to be analyzed
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ErrorHandler errorHandler = new ErrorHandler();
         Parser parser = new Parser(errorHandler);
         SemanticAnalyzer analyzer = new SemanticAnalyzer(errorHandler);
 
-        for (String inFile : args) {
-            System.out.println("\n========== Results for " + inFile + " =============");
-            try {
-                errorHandler.clear();
+        Program program;
+        ClassList fullClassList = new ClassList(0);
 
-                Program program = parser.parse(inFile);
-                analyzer.analyze(program);
-                System.out.println("  Checking was successful.");
-            } catch (CompilationException | IOException ex) {
-                System.out.println(ex.getMessage());
-                System.out.println("  There were errors:");
-                List<Error> errors = errorHandler.getErrorList();
-                for (Error error : errors) {
-                    System.out.println("\t" + error.toString());
+        try {
+            for (String inFile : args) {
+                Program progDummy = parser.parse(inFile);
+                for (ASTNode klass : progDummy.getClassList()) {
+                    fullClassList.addElement(klass);
                 }
+            }
+            program = new Program(0, fullClassList);
+
+            analyzer.analyze(program);
+            System.out.println("  Checking was successful.");
+
+        } catch (CompilationException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("  There were errors:");
+            List<Error> errors = errorHandler.getErrorList();
+            for (Error error : errors) {
+                System.out.println("\t" + error.toString());
             }
         }
 

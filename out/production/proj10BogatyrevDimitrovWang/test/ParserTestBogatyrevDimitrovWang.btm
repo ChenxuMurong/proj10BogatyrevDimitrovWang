@@ -1,5 +1,4 @@
 class Main extends List {
-
     random x = 1;
 
     void main(){

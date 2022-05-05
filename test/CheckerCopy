@@ -14,13 +14,13 @@ ASK DALE:
     prog thinks its casting an Object??)
 */
 
-class thiss extends Main{
+class A extends Main{
 // scope lvl 2
     int subClassField=  0;
 
 
     void maink(String str, int aaa) {
-           super.subClassField++;
+           this.subClassField++;
            this.nameConflict_field=true;
      }
 
@@ -29,11 +29,12 @@ class thiss extends Main{
 class Main{
     int bar = 1;
     boolean nameConflict_field = true;
+    boolean qw = 1;
 
      void main() {
 
 
-     hehehe.delete();
+
 
      }
 

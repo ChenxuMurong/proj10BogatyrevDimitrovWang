@@ -1,8 +1,10 @@
-class Main{
+class Maine{
 
     int a = 9099;
-
+    A b;
     void main(){
+        var b = 0;
+        var b = 0;
         a++;
     }
 
