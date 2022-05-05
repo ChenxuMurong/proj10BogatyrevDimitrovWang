@@ -145,6 +145,7 @@ public class Controller {
     void confirmIfUnsaved(ActionEvent event){
         for (Tab tab: tabPane.getTabs()) {
             if (!this.fileController.tabIsSaved(tab)) {
+                SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
                 // prompts user to save before proceeding to compile
                 Dialog dialog = DialogOptions.getUnsavedChangesDialog(
                         tab.getText(), "compile");
@@ -152,7 +153,7 @@ public class Controller {
                 Optional<ButtonType> result = dialog.showAndWait();
                 // Call handleSave() if user chooses YES
                 if (result.get() == ButtonType.YES) {
-                    // TODO: ONLY SAVE SELECTED TAB
+                    selectionModel.select(tab);
                     this.handleSave(event);
                 }
                 // Quit the process if user chooses CANCEL
