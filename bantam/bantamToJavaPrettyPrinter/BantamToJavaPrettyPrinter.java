@@ -11,7 +11,7 @@ public class BantamToJavaPrettyPrinter extends Visitor {
 
     // the method that the users will call
     public void prettyPrint(ASTNode root) {
-        return root.accept(this);
+        root.accept(this);
     }
 
     // the visit methods for the 54 subclasses of ASTNode
@@ -38,9 +38,112 @@ public class BantamToJavaPrettyPrinter extends Visitor {
 
         System.out.print(node.getName());
 
+        System.out.print(";");
+
+        return null;
+
     }
 
-    //...same for remaining 52 subclasses of ASTNode...
+    public Object visit(BinaryArithDivideExpr node) {
+        node.getLeftExpr().accept(this);
+        System.out.print(" / ");
+        node.getRightExpr().accept(this);
+        return null;
+    }
+
+
+    public Object visit(BinaryCompEqExpr node) {
+        node.getLeftExpr().accept(this);
+        System.out.print(" == ");
+        node.getRightExpr().accept(this);
+        return null;
+    }
+
+    public Object visit(BinaryArithMinusExpr node) {
+        node.getLeftExpr().accept(this);
+        System.out.print(" - ");
+        node.getRightExpr().accept(this);
+        return null;
+    }
+
+    public Object visit(BinaryArithModulusExpr node) {
+        node.getLeftExpr().accept(this);
+        System.out.print(" % ");
+        node.getRightExpr().accept(this);
+        return null;
+    }
+
+    public Object visit(BinaryArithPlusExpr node) {
+        node.getLeftExpr().accept(this);
+        System.out.print(" + ");
+        node.getRightExpr().accept(this);
+        return null;
+    }
+
+    public Object visit(BinaryArithTimesExpr node) {
+        node.getLeftExpr().accept(this);
+        System.out.print(" * ");
+        node.getRightExpr().accept(this);
+        return null;
+    }
+
+    public Object visit(BinaryCompGeqExpr node) {
+        node.getLeftExpr().accept(this);
+        System.out.print(" >= ");
+        node.getRightExpr().accept(this);
+        return null;
+    }
+
+    public Object visit(BinaryCompGtExpr node) {
+        node.getLeftExpr().accept(this);
+        System.out.print(node.getOpName());
+        node.getRightExpr().accept(this);
+        return null;
+    }
+
+    public Object visit(BinaryCompLeqExpr node) {
+        node.getLeftExpr().accept(this);
+        System.out.print(node.getOpName());
+        node.getRightExpr().accept(this);
+        return null;
+    }
+
+    public Object visit(BinaryCompLtExpr node) {
+        node.getLeftExpr().accept(this);
+        System.out.print(node.getOpName());
+        node.getRightExpr().accept(this);
+        return null;
+    }
+
+    public Object visit(BinaryCompNeExpr node) {
+        node.getLeftExpr().accept(this);
+        System.out.print(node.getOpName());
+        node.getRightExpr().accept(this);
+        return null;
+    }
+
+    public Object visit(BinaryLogicAndExpr node) {
+        node.getLeftExpr().accept(this);
+        System.out.print(node.getOpName());
+        node.getRightExpr().accept(this);
+        return null;
+    }
+
+    public Object visit(BreakStmt node) {
+        System.out.print("break; \n");
+        return null;
+    }
+
+
+
+
+
+
+
+
+
+
+        //...same for remaining 52 subclasses of ASTNode...
 
 
 // - - - - - - all the AST subclasses - - - - - -
