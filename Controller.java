@@ -88,7 +88,7 @@ public class Controller {
      */
     public void initializeFirstTab() {
         // disable check, run, and stop buttons
-        runButton.setDisable(true);
+        //runButton.setDisable(true);
         checkButton.setDisable(true);
         stopButton.setDisable(true);
 
@@ -98,7 +98,7 @@ public class Controller {
         initialTab.setContent(new VirtualizedScrollPane<>(codeArea));
 
         checkButton.disableProperty().bind(noTabs());
-        runButton.disableProperty().bind(noTabs());
+        //runButton.disableProperty().bind(noTabs());
     }
 
     /**

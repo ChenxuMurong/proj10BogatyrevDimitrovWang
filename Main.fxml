@@ -111,13 +111,13 @@
                     </padding>
                 </Button>
                 <!-- Compile & Run Button -->
-                <Button id="runButton" fx:id="runButton" mnemonicParsing="false"
+                <!-- <Button id="runButton" fx:id="runButton" mnemonicParsing="false"
                     onAction="#handleRunButton" prefHeight="30.0" 
                     prefWidth="100.0" text="Compile &amp; Run">
                     <padding>
                         <Insets left="2.0" right="2.0" />
                     </padding>
-                </Button>
+                </Button> -->
                 <!-- Stop Button -->
                 <Button id="stopButton" fx:id="stopButton" mnemonicParsing="false"
                     onAction="#handleStopButton" text="Stop" />
