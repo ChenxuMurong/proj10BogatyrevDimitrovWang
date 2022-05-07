@@ -53,6 +53,7 @@ public class Main extends Application {
                     windowEvent.consume();
                 }
             });
+
     
             primaryStage.setTitle("Project 10");
     
